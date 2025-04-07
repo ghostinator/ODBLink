@@ -1,4 +1,4 @@
-# Rclone OneDrive Business Setup GUI
+# ODBLink
 
 A modern, cross-platform GUI application built with PyQt5 to simplify the configuration and mounting of OneDrive for Business/SharePoint using rclone.
 
