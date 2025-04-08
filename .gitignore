@@ -172,3 +172,14 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+MyRcloneGUI/Private/Write-Log.ps1
+.DS_Store
+MyRcloneGUI/MyRcloneGUI.psd1
+MyRcloneGUI/Config/config-template.psd1
+MyRcloneGUI/Public/Azure/Register-AzureApplication.ps1
+MyRcloneGUI/Public/SharePoint/Get-SharePointSites.ps1
+MyRcloneGUI/Public/Rclone/Test-RcloneInstallation.ps1
+MyRcloneGUI/Public/GUI/Show-MainForm.ps1
+MyRcloneGUI/MyRcloneGUI.psm1
+main.py
+.gitignore
