@@ -1,117 +1,116 @@
-# ODBLink
+# RcloneSharePoint Manager
 
-A modern, cross-platform GUI application built with PyQt5 to simplify the configuration and mounting of OneDrive for Business/SharePoint using rclone.
-
-## Features
-
-- Clean, modern interface built with PyQt5
-- Platform-aware functionality:
-  - Windows: Support for both drive letter and folder mounting
-  - macOS/Linux: Folder mounting support
-- Automated rclone configuration for OneDrive Business
-- Real-time status feedback
-- Configurable VFS cache modes
-- Error handling and input validation
+A PowerShell script for managing SharePoint sites using Rclone. This tool provides an interactive terminal interface for connecting to SharePoint, managing sites, and mounting them as local drives.
 
 ## Prerequisites
 
-- Python 3.x
-- PyQt5
-- Rclone (must be installed and available in system PATH)
+- PowerShell 7.0 or later
+- Rclone installed and available in PATH
+- Microsoft Graph PowerShell SDK modules:
+  - Microsoft.Graph.Authentication
+  - Microsoft.Graph.Sites
+  - Microsoft.Graph.Files
 
 ## Installation
 
-1. Clone this repository:
-   ```bash
-   git clone [repository-url]
-   cd [repository-name]
-Copy
-Insert
-Apply
-Install PyQt5:
+1. Install the required PowerShell modules:
+```powershell
+Install-Module Microsoft.Graph.Authentication
+Install-Module Microsoft.Graph.Sites
+Install-Module Microsoft.Graph.Files
+```
 
-pip install PyQt5
-Copy
-Insert
-Apply
-Install Rclone:
+2. Install Rclone from [https://rclone.org/downloads/](https://rclone.org/downloads/)
 
-Windows: Download from Rclone.org
-macOS: brew install rclone
-Linux: sudo apt install rclone (or your distribution's package manager)
-Usage
-Start the application:
+3. Download the `RcloneSharePointManager.ps1` script to your preferred location
 
-python main.py
-Copy
-Insert
-Apply
-Basic Configuration:
+## Features
 
-Enter a name for your remote
-Input your SharePoint URL
-Click "Check Rclone Installation" to verify rclone setup
-Mount Configuration:
+- Automatic Microsoft Graph authentication
+- SharePoint site discovery and management
+- Azure Application registration for Rclone
+- Local mounting of SharePoint sites
+- Interactive terminal interface with color coding
+- Persistent session state
+- Comprehensive logging
 
-Windows users:
-Choose between folder or drive letter mounting
-For drive letter: Enter desired letter (e.g., "O:")
-For folder: Select or enter mount path
-macOS/Linux users:
-Select desired mount folder location
-Advanced Options:
+## Usage
 
-Select VFS cache mode:
-off: No caching
-minimal: Minimal caching
-writes: Cache writes (recommended)
-full: Full file caching
-Operations:
+1. Run the script:
+```powershell
+./RcloneSharePointManager.ps1
+```
 
-"Configure Remote": Sets up the rclone remote
-"Mount Remote": Mounts the configured remote
-Configuration Options
-Remote Settings
-Remote Name: Unique identifier for your rclone configuration
-SharePoint URL: Your OneDrive for Business SharePoint URL
-Mount Settings
-Mount Type (Windows only):
-Folder: Mount to a directory
-Drive Letter: Mount as a Windows drive
-Mount Path: Directory where OneDrive will be mounted
-Cache Mode: Controls how rclone caches files locally
-Troubleshooting
-Verify Rclone Installation:
+2. The script will automatically attempt to connect to Microsoft Graph
+3. Use the interactive menu to:
+   - Check Rclone installation
+   - Register Azure applications
+   - List available SharePoint sites
+   - Select sites for mounting
+   - Mount sites to local directories
 
-Use the "Check Rclone Installation" button
-Ensure rclone is in your system PATH
-Common Issues:
+## Menu Options
 
-Mount failures: Check permissions and existing mounts
-Configuration errors: Verify SharePoint URL format
-Path issues: Ensure mount locations are accessible
-Status Feedback:
+1. **Check Rclone Installation**
+   - Verifies Rclone is properly installed
+   - Displays version information
 
-Check the status area for detailed error messages
-Look for ✓ (success) or ❌ (error) indicators
-Notes
-Windows users may need administrator privileges for drive letter mounting
-For persistent mounts, consider setting up a system service
-The application creates necessary directories if they don't exist
-Configuration is stored in the standard rclone config location
-Contributing
-Contributions are welcome! Please feel free to submit issues or pull requests.
+2. **Register Azure Application**
+   - Creates a new Azure AD application
+   - Configures necessary permissions
+   - Generates and saves Rclone configuration
 
-License
-[Your License Here]
+3. **List SharePoint Sites**
+   - Displays all accessible SharePoint sites
+   - Shows site names, URLs, and IDs
 
+4. **Select SharePoint Site**
+   - Interactive site selection
+   - Required before mounting
 
-This README provides:
-- Clear installation instructions
-- Detailed usage guidelines
-- Platform-specific considerations
-- Troubleshooting help
-- Configuration options
-- All based on the actual implementation in the code
+5. **Mount Selected Site**
+   - Mounts selected SharePoint site locally
+   - Creates mount point if needed
+   - Uses Rclone daemon mode
 
-The documentation is structured to help both new and experienced users understand and use the application effectively.
+## Status Information
+
+The interface shows:
+- Currently logged-in user
+- Selected SharePoint site
+- Currently mounted sites
+- Operation status and logs
+
+## Permissions
+
+The script requires the following Microsoft Graph permissions:
+- Sites.Read.All
+- Sites.ReadWrite.All
+- User.Read.All
+- Group.Read.All
+- Group.ReadWrite.All
+- Application.ReadWrite.All
+- Directory.ReadWrite.All
+
+## Notes
+
+- The script maintains state during execution
+- Mount points are tracked between operations
+- Color coding indicates status and warnings
+- Automatic error handling and recovery
+- Cross-platform compatible (Windows, macOS, Linux)
+
+## Error Handling
+
+- Automatic connection retry
+- Clear error messages
+- Graceful failure recovery
+- Detailed logging
+
+## Support
+
+For issues, questions, or contributions, please:
+1. Check the prerequisites are installed
+2. Verify Rclone is properly configured
+3. Ensure you have the necessary permissions
+4. Check the logs for detailed error information
